@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Balanz — Calorie Balance from Apple Health</title>
+<meta name="description" content="Balanz reads what you burn from Apple Health — resting energy, steps and workouts — and compares it with what you eat. One honest number, no endless food logging." />
+<meta name="theme-color" content="#FF7A2F" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Balanz — Calorie Balance from Apple Health" />
+<meta property="og:description" content="Your real calorie balance, built on Apple Health. Adaptive targets that learn your true metabolism." />
+<meta property="og:url" content="https://alperenciftlikci.github.io/balanz/" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta name="apple-itunes-app" content="app-id=6807057376" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
+
+<style>
+:root{
+  --accent:#FF7A2F; --accent2:#FF9F45;
+  --bg:#F7F7F9; --surface:#FFFFFF; --text:#16161C; --text2:#6E6E7A;
+  --border:rgba(22,22,28,.08); --shadow:0 18px 50px rgba(255,122,47,.18);
+  --radius:22px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0E0E12; --surface:#1A1A20; --text:#F4F4F7; --text2:#A2A2B0;
+    --border:rgba(255,255,255,.10); --shadow:0 18px 50px rgba(0,0,0,.55); }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.grad{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+a{color:inherit;text-decoration:none}
+
+header{padding:22px 0;position:sticky;top:0;backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);z-index:20;border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:20px;letter-spacing:-.4px}
+.logo span{font-size:23px}
+.navlinks{display:flex;gap:22px;font-size:15px;color:var(--text2)}
+.navlinks a:hover{color:var(--text)}
+@media(max-width:640px){.navlinks{display:none}}
+
+.hero{padding:74px 0 60px;text-align:center}
+h1{font-size:clamp(38px,7vw,62px);line-height:1.04;letter-spacing:-2px;font-weight:850;margin-bottom:18px}
+.sub{font-size:clamp(17px,2.2vw,20px);color:var(--text2);max-width:660px;margin:0 auto 30px}
+.cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,var(--accent),var(--accent2));
+  color:#fff;font-weight:700;font-size:17px;padding:15px 30px;border-radius:999px;box-shadow:var(--shadow)}
+.cta:hover{transform:translateY(-2px);transition:.2s}
+.note{margin-top:14px;color:var(--text2);font-size:14px}
+
+.ring{width:190px;height:190px;margin:44px auto 0;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--accent) 0turn .62turn, color-mix(in srgb,var(--text2) 22%,transparent) .62turn 1turn);
+  position:relative}
+.ring::after{content:"";position:absolute;inset:20px;border-radius:50%;background:var(--bg)}
+.ring div{position:relative;z-index:2;text-align:center}
+.ring b{display:block;font-size:40px;font-weight:850;letter-spacing:-1.5px}
+.ring small{color:var(--text2);font-size:13px}
+
+section{padding:64px 0}
+h2{font-size:clamp(26px,4vw,38px);letter-spacing:-1.1px;margin-bottom:12px;font-weight:820}
+.lead{color:var(--text2);max-width:640px;margin-bottom:34px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px}
+.card h3{font-size:18px;margin-bottom:8px;letter-spacing:-.3px}
+.card p{color:var(--text2);font-size:15px}
+.ico{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:20px;margin-bottom:14px;
+  background:color-mix(in srgb,var(--accent) 14%,transparent)}
+
+.steps{counter-reset:s;display:grid;gap:14px;max-width:760px}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);
+  border-radius:18px;padding:20px 22px}
+.step::before{counter-increment:s;content:counter(s);flex:0 0 32px;height:32px;border-radius:50%;
+  background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;font-weight:800;display:grid;place-items:center;font-size:15px}
+.step p{color:var(--text2);font-size:15px;margin-top:3px}
+
+.privacy{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:34px}
+.privacy ul{list-style:none;display:grid;gap:12px;margin-top:16px}
+.privacy li{display:flex;gap:11px;color:var(--text2);font-size:15px}
+.privacy li b{color:var(--text)}
+.check{color:var(--accent);font-weight:800}
+
+footer{border-top:1px solid var(--border);padding:34px 0 50px;color:var(--text2);font-size:14px}
+.fnav{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:14px}
+.fnav a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span>🔥</span> Balanz</div>
+    <nav class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <h1>Know your <span class="grad">real</span><br />calorie balance.</h1>
+    <p class="sub">Balanz reads what you actually burn from Apple Health — resting energy, daily movement and workouts — and compares it with what you eat. One honest number, no endless food logging.</p>
+    <a class="cta" href="https://apps.apple.com/app/id6807057376">Download on the App Store</a>
+    <p class="note">iPhone · iOS 17 or later · Free to use, Pro optional</p>
+
+    <div class="ring"><div><b>490</b><small>left to eat</small></div></div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="lead">Most trackers only count what goes in. Balanz counts both sides of the equation.</p>
+    <div class="steps">
+      <div class="step"><div><strong>Connect Apple Health</strong><p>Balanz reads resting energy, steps, workouts, weight and any food your other apps already write to Health.</p></div></div>
+      <div class="step"><div><strong>Get an honest daily target</strong><p>Your target is built from Mifflin-St Jeor, Harris-Benedict or Katch-McArdle, with a safe deficit already included — so you just eat up to it.</p></div></div>
+      <div class="step"><div><strong>Balanz learns your real metabolism</strong><p>After a few weeks of logging and weigh-ins, adaptive targets replace the formula estimate with what your body actually does.</p></div></div>
+    </div>
+  </section>
+
+  <section id="features">
+    <h2>What you get</h2>
+    <p class="lead">Built around Apple Health, not a food database.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">⚖️</div><h3>Live energy balance</h3><p>Eaten minus burned, updating through the day from your Watch and iPhone.</p></div>
+      <div class="card"><div class="ico">🔥</div><h3>Burn, broken down</h3><p>Resting metabolism, daily movement and workouts shown separately — never double counted.</p></div>
+      <div class="card"><div class="ico">🧠</div><h3>Adaptive targets</h3><p>Balanz compares your intake with your real weight trend and corrects the target as it learns.</p></div>
+      <div class="card"><div class="ico">✍️</div><h3>AI calorie estimates</h3><p>Describe what you ate in your own words and get calories and macros — no barcode hunting.</p></div>
+      <div class="card"><div class="ico">📈</div><h3>Trends that matter</h3><p>Daily balance, intake vs. burn, burn composition, steps and an EWMA-smoothed weight trend.</p></div>
+      <div class="card"><div class="ico">🔒</div><h3>Widgets & privacy</h3><p>Home and lock screen widgets. Your health data stays on your device.</p></div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <h2>Your health data stays yours</h2>
+    <p class="lead">Balanz was built so that the sensitive part never leaves your iPhone.</p>
+    <div class="privacy">
+      <ul>
+        <li><span class="check">✓</span><span><b>Health data never leaves your device.</b> Calories, weight, steps and workouts are read from Apple Health and stored locally — they are never uploaded to our servers.</span></li>
+        <li><span class="check">✓</span><span><b>No account, no sign-up.</b> Balanz uses an anonymous ID so nothing is tied to your name or email.</span></li>
+        <li><span class="check">✓</span><span><b>No ads, no data selling.</b> We do not sell or share your information, and we never use health data for marketing.</span></li>
+        <li><span class="check">✓</span><span><b>AI features are opt-in.</b> The weekly insight only sends anonymous weekly <em>totals</em>, and only after you agree. You can turn it off anytime.</span></li>
+      </ul>
+      <p style="margin-top:20px"><a href="privacy-policy.html" style="color:var(--accent);font-weight:700">Read the full privacy policy →</a></p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fnav">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="support.html">Support</a>
+      <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a>
+      <a href="mailto:ciftlikcialperen@gmail.com">ciftlikcialperen@gmail.com</a>
+    </div>
+    <p>© 2026 Balanz. Not a medical device. Balanz provides estimates for general wellness and is not a substitute for professional medical advice.</p>
+  </div>
+</footer>
+
+</body>
+</html>
